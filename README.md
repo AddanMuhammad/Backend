@@ -32,28 +32,34 @@ This is a full-featured backend API for a YouTube-like video sharing platform. I
 ## Tech Stack
 
 ### Core Framework
+
 - **Node.js** - JavaScript runtime
 - **Express.js** (^5.2.1) - Web framework
 
 ### Database
+
 - **MongoDB** - NoSQL database
 - **Mongoose** (^9.2.1) - MongoDB object modeling
 
 ### Authentication & Security
+
 - **JWT (jsonwebtoken)** (^9.0.3) - Token-based authentication
 - **bcrypt** (^6.0.0) - Password hashing
 - **cookie-parser** (^1.4.7) - HTTP cookies middleware
 
 ### File & Media Management
+
 - **Cloudinary** (^2.9.0) - Cloud storage for images and videos
 - **Multer** (^2.0.2) - File upload middleware
 
 ### Utilities
+
 - **CORS** (^2.8.6) - Cross-origin resource sharing
 - **dotenv** (^17.3.1) - Environment variable management
 - **mongoose-aggregate-paginate-v2** (^1.1.4) - Pagination for aggregation queries
 
 ### Development
+
 - **nodemon** (^3.1.11) - Auto-restart server on file changes
 
 ---
@@ -61,6 +67,7 @@ This is a full-featured backend API for a YouTube-like video sharing platform. I
 ## Installation
 
 1. **Clone or extract the project:**
+
    ```bash
    cd Backend\ Project
    ```
@@ -149,29 +156,32 @@ Backend Project/
 ### User Routes (`/api/v1/users`)
 
 #### Public Endpoints
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/register` | Register a new user with avatar and cover image |
-| POST | `/login` | Authenticate user and get tokens |
+
+| Method | Endpoint    | Description                                     |
+| ------ | ----------- | ----------------------------------------------- |
+| POST   | `/register` | Register a new user with avatar and cover image |
+| POST   | `/login`    | Authenticate user and get tokens                |
 
 #### Protected Endpoints (Require JWT)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/logout` | Logout user and invalidate refresh token |
-| POST | `/refresh-token` | Refresh access token |
-| POST | `/change-password` | Change user password |
-| POST | `/current-user` | Get current logged-in user details |
-| PATCH | `/update-account` | Update user account details |
-| PATCH | `/avatar` | Update user avatar |
-| PATCH | `/cover-image` | Update user cover image |
-| GET | `/c/:username` | Get user channel profile |
-| GET | `/history` | Get user's watch history |
+
+| Method | Endpoint           | Description                              |
+| ------ | ------------------ | ---------------------------------------- |
+| POST   | `/logout`          | Logout user and invalidate refresh token |
+| POST   | `/refresh-token`   | Refresh access token                     |
+| POST   | `/change-password` | Change user password                     |
+| POST   | `/current-user`    | Get current logged-in user details       |
+| PATCH  | `/update-account`  | Update user account details              |
+| PATCH  | `/avatar`          | Update user avatar                       |
+| PATCH  | `/cover-image`     | Update user cover image                  |
+| GET    | `/c/:username`     | Get user channel profile                 |
+| GET    | `/history`         | Get user's watch history                 |
 
 ---
 
 ## Features
 
 ### User Management
+
 - ✅ User registration with email and username validation
 - ✅ Secure password hashing with bcrypt
 - ✅ User authentication with JWT tokens
@@ -181,6 +191,7 @@ Backend Project/
 - ✅ Account details update
 
 ### Video Management
+
 - ✅ Video upload with thumbnail
 - ✅ Video metadata (title, description, duration)
 - ✅ Published/unpublished status
@@ -188,11 +199,13 @@ Backend Project/
 - ✅ Pagination support for video lists
 
 ### Social Features
+
 - ✅ User subscriptions (channel subscriptions)
 - ✅ Watch history tracking
 - ✅ User channel profiles
 
 ### Security
+
 - ✅ JWT-based authentication
 - ✅ Password hashing with bcrypt
 - ✅ CORS enabled for secure cross-origin requests
@@ -200,6 +213,7 @@ Backend Project/
 - ✅ Request validation and error handling
 
 ### File Management
+
 - ✅ Avatar upload and management
 - ✅ Cover image upload
 - ✅ Video file storage on Cloudinary
@@ -210,7 +224,9 @@ Backend Project/
 ## Database Models
 
 ### User Model
+
 Stores user information with the following fields:
+
 ```
 - username (unique, lowercase)
 - email (unique, lowercase)
@@ -224,7 +240,9 @@ Stores user information with the following fields:
 ```
 
 ### Video Model
+
 Stores video information with the following fields:
+
 ```
 - videoFile (Cloudinary URL)
 - thumbnail (Cloudinary URL)
@@ -238,7 +256,9 @@ Stores video information with the following fields:
 ```
 
 ### Subscription Model
+
 Tracks user subscriptions with the following fields:
+
 ```
 - subscriber (User reference)
 - channel (User reference)
@@ -252,6 +272,7 @@ Tracks user subscriptions with the following fields:
 The application uses JWT (JSON Web Tokens) for authentication:
 
 ### Token Flow
+
 1. **Registration** → User provides credentials and uploads avatar
 2. **Login** → User receives access and refresh tokens
 3. **Protected Routes** → Include access token in Authorization header or cookies
@@ -259,10 +280,12 @@ The application uses JWT (JSON Web Tokens) for authentication:
 5. **Logout** → Invalidate refresh token
 
 ### Token Structure
+
 - **Access Token**: Short-lived token for API requests (default: 7 days)
 - **Refresh Token**: Long-lived token to refresh access token (default: 30 days)
 
 ### Usage in Requests
+
 ```
 Authorization: Bearer <access_token>
 ```
@@ -274,13 +297,17 @@ Or via cookies (automatically handled by cookie-parser)
 ## File Uploads
 
 ### Multer Middleware
+
 Handles file uploads with the following features:
+
 - Avatar upload (single file)
 - Cover image upload (single file)
 - Multiple file fields support
 
 ### Cloudinary Integration
+
 All uploaded files are stored on Cloudinary:
+
 - Images (avatars, thumbnails, cover images)
 - Video files
 - Secure URLs returned for stored files
@@ -290,7 +317,9 @@ All uploaded files are stored on Cloudinary:
 ## Running the Server
 
 ### Development Mode
+
 Start the server with auto-reload on file changes:
+
 ```bash
 npm run dev
 ```
@@ -298,6 +327,7 @@ npm run dev
 The server will start on the port specified in `.env` (default: 8000)
 
 ### Console Output
+
 ```
 Server is running on port 8000
 MongoDB connected !! DB HOST: <your_mongodb_host>
@@ -308,22 +338,27 @@ MongoDB connected !! DB HOST: <your_mongodb_host>
 ## Error Handling
 
 The application uses a custom `ApiError` class with:
+
 - HTTP status codes
 - Descriptive error messages
 - Error stacks for debugging
 - Standardized error format
 
 ### Standard Success Response
+
 ```json
 {
   "statusCode": 200,
   "message": "Success message",
-  "data": { /* response data */ },
+  "data": {
+    /* response data */
+  },
   "success": true
 }
 ```
 
 ### Standard Error Response
+
 ```json
 {
   "statusCode": 400,
@@ -338,15 +373,19 @@ The application uses a custom `ApiError` class with:
 ## Utility Functions
 
 ### asyncHandler
+
 Wraps async route handlers to automatically catch errors and pass them to error middleware.
 
 ### ApiResponse
+
 Creates standardized API response objects with status code, message, and data.
 
 ### ApiError
+
 Custom error class extending JavaScript Error for consistent error handling.
 
 ### Cloudinary Utils
+
 Handles file uploads to Cloudinary and returns secure URLs.
 
 ---
@@ -363,7 +402,7 @@ Handles file uploads to Cloudinary and returns secure URLs.
 ✅ Separation of concerns (Controllers, Models, Routes, Middleware, Utils)  
 ✅ Database connection with proper error handling  
 ✅ File upload security with Multer  
-✅ Cloud storage integration with Cloudinary  
+✅ Cloud storage integration with Cloudinary
 
 ---
 
